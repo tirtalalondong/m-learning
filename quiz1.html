@@ -1,0 +1,153 @@
+<DOCTYPE! html>
+<html>
+<head>
+<title>M-Learning</title>
+<link rel="stylesheet" href="css/jquery.mobile-1.0.min.css" />
+
+<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.2.1.min.css" />
+<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.2.1.css" />
+<link rel="stylesheet" href="css/themes/default/jquery.mobile.theme-1.2.1.css" />
+<link rel="stylesheet" href="css/themes/default/jquery.mobile.theme-1.2.1.min.css" />
+<link rel="stylesheet" href="css/themes/default/jquery.mobile.structure-1.2.1.min.css" />
+<link rel="stylesheet" href="css/themes/default/jquery.mobile.structure-1.2.1.css" />
+
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/jquery.mobile-1.0.min.js"></script>
+
+<!-- js untuk quiz -->
+<!--<script src="js/quiz.js"></script>-->
+
+<script>
+$(document).bind("mobileinit", function(){
+$.mobile.page.prototype.options.addBackBtn=true;
+	$.mobile.page.prototype.options.theme="a";
+	$.mobile.page.prototype.options.theme="b";
+	$.mobile.page.prototype.options.theme="c";
+	$.mobile.page.prototype.options.theme="d";
+	$.mobile.page.prototype.options.theme="e";
+});
+</script>
+
+<style type="text/css">
+.chkans {
+	margin:10px 10px -5px 0;
+} 
+
+span.chkans {
+	position:relative;
+	top:5px
+} 
+
+* html span.chkans {
+	top:2px
+}
+</style>
+
+<script type="text/javascript">
+/*/////////////////////////////
+* Quiz Evaluation Script © jscheuer1
+* permission to use granted
+* this credit must stay intact
+/////////////////////////////*/
+
+//Set number of questions
+var numQuest=3
+
+////////////////Stop Editing///////////////
+var ie=document.all
+function showAnswer(el,ans){
+ie? ie[el].innerHTML='Jawaban yang benar: '+ ans : document.getElementById(el).innerHTML='Jawaban yang benar: '+ ans
+}
+
+function addup()  {
+var q, right, statement, total=0
+questions=new Array();
+for (i = 0; i < numQuest; i++)
+questions[i]=0
+if (document.forms.quiz.q1['right1']){
+for (i = 0; i < numQuest; i++){
+q="q"+(i+1)
+right="right"+(i+1)
+if (document.forms.quiz[q][right].checked)
+questions[i]=1
+}
+}
+else if (document.getElementById){
+for (i = 0; i < numQuest; i++){
+right="right"+(i+1)
+if (document.getElementById(right).checked)
+questions[i]=1
+}
+}
+else
+return;
+for (i = 0; i < numQuest; i++)
+total += questions[i]
+/*/////////////////////////////////////////////////
+Set score response below.
+///////////////////Edit Below to Suit/////////////*/
+statement='Skor Anda '+ total +' dari '+ numQuest +' yang benar, '+ Math.round(total/numQuest*100) +'%'
+/////////////////Stop Editing///////////////////
+ie? ie.results.innerHTML=statement : document.getElementById('results').innerHTML=statement
+}
+function clearR(){
+ie? ie.results.innerHTML='' : document.getElementById('results').innerHTML=''
+for (i = 0; i < numQuest; i++)
+ie? ie["ans"+(i+1)].innerHTML='' : document.getElementById("ans"+(i+1)).innerHTML=''
+}
+</script>
+</head>
+
+<body>
+<div id="quiz1" data-role="page" data-position="fixed" data-theme="d">
+	<div data-role="header">
+		<h1>M-Learning</h1>
+		<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+	</div>
+	<div data-role="content">
+		<form name="quiz">
+		
+			<b>Pertanyaan 1:</b><br>
+			<b>Apakah yang dimaksud dengan Website?</b><br>
+			<input id="right1" type="radio" unchecked name="q1"><label for="right1">
+				Halaman untuk menampilkan sekumpulan teks, gambar diam atau gerak, animasi, suara, dan 
+				atau gabungan dari semuanya</label><br>
+			<input id="w1a" type="radio" unchecked name="q1"><label for="w1a">Jaringan Laba-laba</label><br>
+			<input id="w1b" type="radio" unchecked name="q1"><label for="w1b">Code Editor</label><br>
+			<input id="w1c" type="radio" unchecked name="q1"><label for="w1c">Alat Masak</label><br>
+			<h3><input class="chkans" type="button" value="Check Answer" onclick="showAnswer('ans1','Halaman untuk menampilkan sekumpulan teks, gambar diam atau gerak, animasi, suara, dan 
+				atau gabungan dari semuanya')">&nbsp;</h3><span id="ans1" class="chkans"></span></h3>
+			<br>&nbsp;<br>
+			
+			<b>Pertanyaan 2:</b><br>
+			<b>Apakah yang dimaksud dengan Framework?</b><br>
+			<input id="w2a" type="radio" unchecked name="q2"><label for="w2a">Keranjang Buah</label><br>
+			<input id="w2b" type="radio" unchecked name="q2"><label for="w2b">Bakul</label><br>
+			<input id="right2" type="radio" unchecked name="q2"><label for="right2">Sekumpulan fungsi, class dan aturan-aturan</label><br>
+			<input id="w2c" type="radio" unchecked name="q2"><label for="w2c">Ruangan Kerja</label><br>
+			<h3><input class="chkans" type="button" value="Check Answer" onclick="showAnswer('ans2','Sekumpulan fungsi, class dan aturan-aturan')">&nbsp;<span id="ans2" class="chkans"></span></h3>
+			<br>&nbsp;<br>
+			
+			<b>Pertanyaan 3:</b><br>
+			<b>Apakah itu Python?</b><br>
+			<input id="w3a" type="radio" unchecked name="q3"><label for="w3a">Bahasa Indonesia</label><br>
+			<input id="right3" type="radio" unchecked name="q3"><label for="right3">Bahasa pemrograman tingkat tinggi yang interpreted dan berorientasi objek</label><br>
+			<input id="w3b" type="radio" unchecked name="q3"><label for="w3b">Bahasa Inggris</label><br>
+			<input id="w3c" type="radio" unchecked name="q3"><label for="w3c">Bahasa Asing</label><br>
+			<h3><input class="chkans" type="button" value="Check Answer" onclick="showAnswer('ans3','Bahasa pemrograman tingkat tinggi yang interpreted dan berorientasi objek')">&nbsp;<span id="ans3" class="chkans"></span></h3>
+			<br>&nbsp;<br>
+			
+			<hr><br>
+			
+			<h2><input type="button" value="See Score" onclick="addup()">&nbsp;&nbsp;<span id="results"><h2></span><br>&nbsp;<br>
+			<input type="button" value="Start Again" onclick="reset();clearR()">
+		</form>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h4>Copyright © 2013 - <a href="luckyandstrike.blogspot.com">Lucky And Strike</a></h4>
+		<a href="index.html" data-role="button" data-icon="arrow-l">Back</a>
+	</div>
+</div>
+
+</body>
+</html>
